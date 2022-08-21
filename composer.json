@@ -1,0 +1,17 @@
+{
+    "name": "eltharin/automaticcollection",
+    "autoload": {
+        "psr-4": {
+            "Eltharin\\AutomaticCollection\\": "src/"
+        }
+    },
+    "require": {
+        "eltharin/twigfilesgetter": "*"
+    },
+	"description": "automaticcollection Bundle for symfony",
+    "keywords": ["Symfony", "PHP", "Web", "Bundle"],
+    "license": "GPL-3.0",
+	"type": "symfony-bundle",
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
