@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Markup;
-
+use Eltharin\TwigFilesGetterBundle\Service\FileManager;
 
 class AutomaticCollectionType extends AbstractType
 {
@@ -29,6 +29,13 @@ class AutomaticCollectionType extends AbstractType
 		if($options['allow_delete'])
 		{
 			$view->vars['attr']['class'] = $view->vars['attr']['class'] ?? '' . ' form-row-deletable';
+			FileManager::registerJsFile('/bundles/eltharinautomaticcollection/js/form-row-deletable.js');
 		}
 	}
+
+	public function getBlockPrefix()
+	{
+		return 'automatic_collection';
+	}
+
 }

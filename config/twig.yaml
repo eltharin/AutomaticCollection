@@ -1,0 +1,2 @@
+twig:
+    form_themes: ['@EltharinAutomaticCollection/__form_automatic_collection_widget.html.twig']
