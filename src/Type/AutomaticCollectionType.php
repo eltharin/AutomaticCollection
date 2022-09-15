@@ -2,6 +2,8 @@
 
 namespace Eltharin\AutomaticCollection\Type;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -31,10 +33,12 @@ class AutomaticCollectionType extends AbstractType
 		if($options['allow_add'])
 		{
 			$view->vars['row_attr']['data-addbtn'] = $options['addbtn'];
+			$view->vars['row_attr']['data-delbtn'] = $options['delbtn'];
 		}
 
 		$view->vars['attr']['class'] = ($view->vars['attr']['class'] ?? '') . ' form-row-collection';
-		$view->vars['attr']['data-index'] = $view->vars['data'] ? max(array_keys($view->vars['data']))+1 : 0; //-- on positionne l'index en fonction du plus grand existant
+		$data = ($view->vars['data'] instanceof ArrayCollection or $view->vars['data'] instanceof  PersistentCollection) ? $view->vars['data']->toArray() : $view->vars['data'];
+		$view->vars['attr']['data-index'] = $data ? max(array_keys($data))+1 : 0; //-- on positionne l'index en fonction du plus grand existant
 
 		if($options['allow_delete'])
 		{
