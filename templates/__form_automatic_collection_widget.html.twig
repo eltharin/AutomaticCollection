@@ -1,6 +1,6 @@
 {%- block automatic_collection_widget -%}
     {% if allow_add %}
-        <button type="button" class="add_sub_element" data-collection-holder-class="{{ id }}">New</button>
+        <div class="addbtn" data-collection-holder-class="{{ id }}"></div>
     {% endif %}
     {{- block('collection_widget') -}}
 {%- endblock automatic_collection_widget -%}
