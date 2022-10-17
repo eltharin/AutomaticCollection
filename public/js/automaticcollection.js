@@ -1,13 +1,7 @@
 window.addEventListener("DOMContentLoaded", (event) => {
 	document
-		.querySelectorAll('.form-collection .addbtn')
-		.forEach(element => {
-			let btn = document.createElement('div');
-			btn.innerHTML = element.closest('.form-collection').dataset.addbtn;
-			btn = btn.firstChild;
-			btn.dataset.collectionHolderClass = element.dataset.collectionHolderClass;
-			btn.classList.add('add_sub_element');
-
+		.querySelectorAll('.form-collection .automatic_collection_addBtn')
+		.forEach(btn => {
 			btn.onclick = (event) => {
 				e = event.target;
 
@@ -31,28 +25,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
 						collectionHolder.dataset.index
 					);
 
-				let delbtn = document.createElement('div');
-				delbtn.innerHTML = btn.closest('.form-collection').dataset.delbtn;
-				delbtn = delbtn.firstChild;
-
-				delbtn.onclick = (e) => {
+				item.querySelector('.automatic_collection_delBtn').onclick = (e) => {
 					e.target.parentNode.remove();
 				};
-				item.firstChild.append(delbtn);
 				collectionHolder.appendChild(item.firstChild);
 
 				collectionHolder.dataset.index++;
 			};
-
-			element.parentNode.replaceChild(btn, element);
 		});
 
-	document.querySelectorAll('.form-row-deletable > div').forEach((el) => {
-		let btn = document.createElement('div');
-		btn.innerHTML = el.closest('.form-collection').dataset.delbtn;
-		btn = btn.firstChild;
-
+	document.querySelectorAll('.form-row-deletable .automatic_collection_delBtn').forEach((btn) => {
 		btn.onclick = (e) => {e.target.parentNode.remove();};
-		el.append(btn);
 	});
 });

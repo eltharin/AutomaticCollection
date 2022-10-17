@@ -40,7 +40,7 @@ You have two Form Types:
 
 PrincipalType :
 
-```
+``` php
 class PrincipalType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -53,8 +53,8 @@ class PrincipalType extends AbstractType
 						'allow_add' => true,
 						'allow_delete' => true,
 						'by_reference' => false,
-						'addbtn' => '<button>add</button>',
-						'delbtn' => '<button>suppr</button>'
+						'add_button_string' => '<button type="button" class="automatic_collection_addBtn" data-collection-holder-class="{{ id }}">New</button>',
+						'delete_button_string' => '<button type="button" class="btn danger automatic_collection_delBtn">Suppr</button>'
 					]);
 		;
 	}
@@ -70,7 +70,7 @@ class PrincipalType extends AbstractType
 
 And SecondType : 
 
-```
+``` php
 class SecondType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -94,4 +94,15 @@ In PrincipalType, the options allow_add and allow_delete (from CollectionType) w
 
 When you add a new row, the button delete will be shown no matter that the allow_delete is at true.
 
-you can change HTML button by the options addbtn and delbtn, classes and dataset wil be written in js automaticlly 
+you can change HTML button : 
+> by set the HTML String with the options add_button_string and delete_button_string, don't forget classes automatic_collection_addBtn and automatic_collection_delBtn for JS and data-collection-holder-class="{{ id }}" (change in future version)
+> or by replacing twig templates: 
+``` twig
+{%- block automatic_collection_add_button_widget -%}
+    <button type="button" class="automatic_collection_addBtn" data-collection-holder-class="{{ id }}">New</button>
+{%- endblock automatic_collection_add_button_widget -%}
+
+{%- block automatic_collection_delete_button_widget -%}
+    <button type="button" class="btn danger automatic_collection_delBtn">Suppr</button>
+{%- endblock automatic_collection_delete_button_widget -%}
+```
