@@ -54,6 +54,7 @@ class AutomaticCollectionType extends AbstractType
 
 		$view->vars['row_attr']['allow_delete'] = $options['allow_delete'];
 		$view->vars['params'] = $options['params'];
+		$view->vars['data-collection-holder-class'] = $view->vars['id'];
 	}
 
 	public function getBlockPrefix()
