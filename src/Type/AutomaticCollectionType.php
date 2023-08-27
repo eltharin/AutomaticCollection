@@ -69,6 +69,7 @@ class AutomaticCollectionType extends AbstractType
 			'add_button_string' => '',
 			'delete_button_block' => 'automatic_collection_delete_button_widget',
 			'delete_button_string' => '',
+			'by_reference' => false, // for use add function from parent
 			'params' => [],
 		]);
 	}
