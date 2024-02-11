@@ -13,7 +13,7 @@
     <button type="button" class="automatic_collection_addBtn" data-collection-holder-class="{{ id }}">New</button>
 {%- endblock automatic_collection_add_button_widget -%}
 
-{%- block collection_entry_widget -%}
+{%- block automatic_collection_entry_widget -%}
     {{- block('form_widget') -}}
     {% if form.parent.vars.allow_delete or data == null %}
         {% if form.parent.vars.automatic_collection_delete_button_string == '' %}
@@ -22,7 +22,7 @@
             {{- include(template_from_string(form.parent.vars.automatic_collection_delete_button_string)) -}}
         {% endif %}
     {% endif %}
-{%- endblock collection_entry_widget -%}
+{%- endblock automatic_collection_entry_widget -%}
 
 {%- block automatic_collection_delete_button_widget -%}
     <button type="button" class="btn danger automatic_collection_delBtn">Suppr</button>

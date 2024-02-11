@@ -6,17 +6,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 				e = event.target;
 
 				const collectionHolder = document.querySelector('#' + e.dataset.collectionHolderClass);
+
 				if(collectionHolder.dataset.index == undefined)
 				{
 					collectionHolder.dataset.index = collectionHolder.children.length;
 				}
 
-				const item = document.createElement('div');
-
-				item.innerHTML = collectionHolder
+				const htmlToAdd = collectionHolder
 					.dataset
-					.prototype
-					.replace(
+					.prototype.replace(
 						/__label__/g,
 						'__'
 					)
@@ -25,16 +23,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
 						collectionHolder.dataset.index
 					);
 
-				item.querySelector('.automatic_collection_delBtn').onclick = (e) => {
-					e.target.parentNode.remove();
-				};
-				collectionHolder.appendChild(item.firstChild);
+				if(collectionHolder.nodeName == 'TBODY')
+				{
+					collectionHolder.insertRow().outerHTML = htmlToAdd;
+				}
+				else
+				{
+					collectionHolder.append(htmlToAdd);
+				}
+
+				e.dispatchEvent(new CustomEvent('addLine', {"bubbles":true, "cancelable":false, 'detail':{'index' : collectionHolder.dataset.index}}));
 
 				collectionHolder.dataset.index++;
 			};
 		});
 
-	document.querySelectorAll('.form-row-deletable .automatic_collection_delBtn').forEach((btn) => {
-		btn.onclick = (e) => {e.target.parentNode.remove();};
-	});
+
+		document.addEventListener('click', function(e) {
+			for (var target = e.target; target && target != this; target = target.parentNode) {
+				if (target.matches('.automatic_collection_delBtn')) {
+					e.eventTarget = target;
+					e.target.closest('.form-row').remove();
+					break;
+				}
+			}
+		}, false);
 });
