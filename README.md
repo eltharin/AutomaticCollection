@@ -36,7 +36,7 @@ When allow_delete param is not set, you can have the delete button only for the 
 Use It : 
 ---------------------------
 
-You have two Form Types: 
+As CollectionType, You have two Form Types: 
 
 PrincipalType :
 
@@ -94,10 +94,12 @@ In PrincipalType, the options allow_add and allow_delete (from CollectionType) w
 
 When you add a new row, the button delete will be shown no matter that the allow_delete is at true.
 
-you can change HTML button : 
-> by set the HTML String with the options add_button_string and delete_button_string, don't forget classes automatic_collection_addBtn and automatic_collection_delBtn for JS and data-collection-holder-class="{{ id }}" (change in future version)
-> or by replacing twig templates: 
+you can change HTML button by replacing twig templates in your form template site or in same template : 
+
 ``` twig
+{# if in same view don't forget this line to enable it #}
+{% form_theme form _self %} 
+
 {%- block automatic_collection_add_button_widget -%}
     <button type="button" class="automatic_collection_addBtn" data-collection-holder-class="{{ id }}">New</button>
 {%- endblock automatic_collection_add_button_widget -%}
@@ -106,3 +108,5 @@ you can change HTML button :
     <button type="button" class="btn danger automatic_collection_delBtn">Suppr</button>
 {%- endblock automatic_collection_delete_button_widget -%}
 ```
+
+don't forget to add classes automatic_collection_addBtn and automatic_collection_delBtn for JS and data-collection-holder-class="{{ id }}"
