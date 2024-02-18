@@ -16,12 +16,12 @@ use Eltharin\TwigFilesGetterBundle\Service\FileManager;
 
 class AutomaticCollectionType extends AbstractType
 {
-	public function getParent()
+	public function getParent() : ?string
 	{
 		return CollectionType::class;
 	}
 
-	public function buildView(FormView $view, FormInterface $form, array $options)
+	public function buildView(FormView $view, FormInterface $form, array $options) : void
 	{
 		if(class_exists(FileManager::class ))
 		{
@@ -57,7 +57,7 @@ class AutomaticCollectionType extends AbstractType
 		$view->vars['data-collection-holder-class'] = $view->vars['id'];
 	}
 
-	public function getBlockPrefix()
+	public function getBlockPrefix() : string
 	{
 		return 'automatic_collection';
 	}
@@ -72,5 +72,21 @@ class AutomaticCollectionType extends AbstractType
 			'by_reference' => false, // for use add function from parent
 			'params' => [],
 		]);
+	}
+	public function finishView(FormView $view, FormInterface $form, array $options) : void
+	{
+		foreach ($view as $entryView)
+		{
+			$offset = array_search('collection_entry', $entryView->vars['block_prefixes']);
+			array_splice($entryView->vars['block_prefixes'], $offset+1, 0, 'automatic_collection_entry');
+		}
+
+		/** @var FormInterface $prototype */
+		if ($prototype = $form->getConfig()->getAttribute('prototype'))
+		{
+
+			$offset = array_search('collection_entry', $view->vars['prototype']->vars['block_prefixes']);
+			array_splice($view->vars['prototype']->vars['block_prefixes'], $offset+1, 0, 'automatic_collection_entry');
+		}
 	}
 }

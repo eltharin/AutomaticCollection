@@ -6,7 +6,7 @@
             {{- include(template_from_string(automatic_collection_add_button_string)) -}}
         {% endif %}
     {% endif %}
-    {{- block('collection_widget') -}}
+    {{- form_widget(form) -}}
 {%- endblock automatic_collection_widget -%}
 
 {%- block automatic_collection_add_button_widget -%}
@@ -14,7 +14,7 @@
 {%- endblock automatic_collection_add_button_widget -%}
 
 {%- block automatic_collection_entry_widget -%}
-    {{- block('form_widget') -}}
+    {{- form_widget(form) -}}
     {% if form.parent.vars.allow_delete or data == null %}
         {% if form.parent.vars.automatic_collection_delete_button_string == '' %}
             {{- block(form.parent.vars.automatic_collection_delete_button_block) -}}
