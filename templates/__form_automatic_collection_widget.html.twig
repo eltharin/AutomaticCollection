@@ -1,10 +1,6 @@
 {%- block automatic_collection_widget -%}
     {% if allow_add %}
-        {% if automatic_collection_add_button_string == '' %}
-            {{- block(automatic_collection_add_button_block) -}}
-        {% else %}
-            {{- include(template_from_string(automatic_collection_add_button_string)) -}}
-        {% endif %}
+        {{- block(automatic_collection_add_button_block) -}}
     {% endif %}
     {{- form_widget(form) -}}
 {%- endblock automatic_collection_widget -%}
@@ -16,11 +12,7 @@
 {%- block automatic_collection_entry_widget -%}
     {{- form_widget(form) -}}
     {% if form.parent.vars.allow_delete or data == null %}
-        {% if form.parent.vars.automatic_collection_delete_button_string == '' %}
-            {{- block(form.parent.vars.automatic_collection_delete_button_block) -}}
-        {% else %}
-            {{- include(template_from_string(form.parent.vars.automatic_collection_delete_button_string)) -}}
-        {% endif %}
+        {{- block(form.parent.vars.automatic_collection_delete_button_block) -}}
     {% endif %}
 {%- endblock automatic_collection_entry_widget -%}
 

@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 				}
 				else
 				{
-					collectionHolder.append(htmlToAdd);
+					collectionHolder.append(document.createRange().createContextualFragment(htmlToAdd));
 				}
 
 				e.dispatchEvent(new CustomEvent('addLine', {"bubbles":true, "cancelable":false, 'detail':{'index' : collectionHolder.dataset.index}}));
@@ -43,7 +43,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			for (var target = e.target; target && target != this; target = target.parentNode) {
 				if (target.matches('.automatic_collection_delBtn')) {
 					e.eventTarget = target;
-					e.target.closest('.form-row').remove();
+					e.target.closest('.automatic-collection-entry-row').remove();
 					break;
 				}
 			}

@@ -32,9 +32,7 @@ class AutomaticCollectionType extends AbstractType
 
 
 		$view->vars['automatic_collection_add_button_block'] = $options['add_button_block'];
-		$view->vars['automatic_collection_add_button_string'] = $options['add_button_string'];
 		$view->vars['automatic_collection_delete_button_block'] = $options['delete_button_block'];
-		$view->vars['automatic_collection_delete_button_string'] = $options['delete_button_string'];
 
 		/*if($options['allow_add'])
 		{
@@ -66,9 +64,7 @@ class AutomaticCollectionType extends AbstractType
 	{
 		$resolver->setDefaults([
 			'add_button_block' => 'automatic_collection_add_button_widget',
-			'add_button_string' => '',
 			'delete_button_block' => 'automatic_collection_delete_button_widget',
-			'delete_button_string' => '',
 			'by_reference' => false, // for use add function from parent
 			'params' => [],
 		]);
@@ -79,6 +75,8 @@ class AutomaticCollectionType extends AbstractType
 		{
 			$offset = array_search('collection_entry', $entryView->vars['block_prefixes']);
 			array_splice($entryView->vars['block_prefixes'], $offset+1, 0, 'automatic_collection_entry');
+
+			$entryView->vars['row_attr']['class'] = ($entryView->vars['row_attr']['class'] ?? '') . ' automatic-collection-entry-row';
 		}
 
 		/** @var FormInterface $prototype */
